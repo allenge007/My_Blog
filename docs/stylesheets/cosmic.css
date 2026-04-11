@@ -605,8 +605,40 @@
 
 .hero--fullscreen .hero__background {
   position: absolute;
-  inset: 0;
+  inset: -20%; /* extra space for parallax movement */
   z-index: 0;
+  will-change: transform;
+}
+
+/* Bottom fade: smooth blend from hero into features section */
+.hero__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+[data-md-color-scheme="slate"] .hero__fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(11, 11, 16, 0.4) 30%,
+    rgba(11, 11, 16, 0.8) 65%,
+    #0B0B10 100%
+  );
+}
+
+[data-md-color-scheme="default"] .hero__fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(241, 245, 249, 0.3) 30%,
+    rgba(241, 245, 249, 0.7) 65%,
+    #F1F5F9 100%
+  );
 }
 
 /* Ken Burns slow zoom effect on hero image */
@@ -814,8 +846,18 @@
    Homepage Feature Cards
    ============================================================ */
 .home-features {
-  padding: 5rem 0;
+  position: relative;
+  padding: 4rem 0 5rem;
   background: var(--md-default-bg-color);
+  /* Top gradient: seamless blend from hero */
+}
+
+[data-md-color-scheme="slate"] .home-features {
+  background: #0B0B10;
+}
+
+[data-md-color-scheme="default"] .home-features {
+  background: #F1F5F9;
 }
 
 .home-features__grid {
@@ -913,11 +955,11 @@
 }
 
 [data-md-color-scheme="slate"] .home-about {
-  background: linear-gradient(180deg, var(--md-default-bg-color) 0%, #0D0F1A 100%);
+  background: linear-gradient(180deg, #0B0B10 0%, rgba(6, 8, 14, 1) 100%);
 }
 
 [data-md-color-scheme="default"] .home-about {
-  background: linear-gradient(180deg, var(--md-default-bg-color) 0%, #E2E8F0 100%);
+  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
 }
 
 .home-about__inner {

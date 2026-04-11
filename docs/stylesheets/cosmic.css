@@ -697,25 +697,40 @@
   padding: 2rem;
   border-radius: 12px;
   background: rgba(18, 19, 26, 0.7);
-  border: 1px solid rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.08);
+  cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.3s;
+              border-color 0.4s,
+              background 0.4s;
 }
 
 .home-feature:hover {
   transform: translateY(-8px);
+  background: rgba(26, 28, 46, 0.85);
+  border-color: rgba(59, 130, 246, 0.4);
   box-shadow:
-    0 12px 40px rgba(59, 130, 246, 0.2),
-    0 0 0 1px rgba(59, 130, 246, 0.15),
-    inset 0 1px 0 rgba(248, 250, 252, 0.05);
-  border-color: rgba(59, 130, 246, 0.35);
+    0 14px 44px rgba(59, 130, 246, 0.2),
+    0 0 20px rgba(59, 130, 246, 0.08),
+    inset 0 1px 0 rgba(248, 250, 252, 0.06);
 }
 
-/* Icon floats up on card hover */
+/* Icon floats up + glow on hover */
 .home-feature:hover .home-feature__icon {
   transform: translateY(-4px) scale(1.1);
-  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+  color: #60A5FA;
+}
+
+/* Title brightens on hover */
+.home-feature:hover .home-feature__title {
+  color: #FFFFFF;
+}
+
+/* Link arrow slides right on hover */
+.home-feature:hover .home-feature__link {
+  color: #22D3EE;
+  letter-spacing: 0.03em;
 }
 
 .home-feature__icon {
@@ -730,6 +745,7 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: #F8FAFC;
+  transition: color 0.3s;
 }
 
 .home-feature__desc {
@@ -744,7 +760,7 @@
   font-weight: 500;
   color: #3B82F6;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.3s, letter-spacing 0.3s;
 }
 
 .home-feature__link:hover {

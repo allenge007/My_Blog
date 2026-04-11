@@ -5,9 +5,39 @@
 
   <!-- Homepage-only overrides -->
   <style>
+    /* Header + tabs transparent — hero shows through */
     .md-header {
       position: initial;
+      background: transparent !important;
+      box-shadow: none !important;
+      border-bottom: none !important;
     }
+    .md-tabs {
+      background: transparent !important;
+      border-bottom: none !important;
+    }
+
+    /* Force all header/tabs text to light (always on dark hero) */
+    .md-header,
+    .md-header__title,
+    .md-header__topic,
+    .md-header__ellipsis,
+    .md-header .md-header__button,
+    .md-header .md-logo,
+    .md-header .md-icon {
+      color: #F8FAFC !important;
+    }
+    .md-header__source {
+      color: rgba(248, 250, 252, 0.7) !important;
+    }
+    .md-tabs__link {
+      color: rgba(248, 250, 252, 0.7) !important;
+    }
+    .md-tabs__link--active,
+    .md-tabs__link:hover {
+      color: #22D3EE !important;
+    }
+
     .md-main__inner {
       margin: 0;
     }

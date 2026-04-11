@@ -806,7 +806,184 @@
   color: #2563EB;
 }
 
+/* ============================================================
+   Homepage Feature Cards
+   ============================================================ */
+.home-features {
+  padding: 5rem 0;
+  background: var(--md-default-bg-color);
+}
+
+.home-features__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .home-features__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .home-features__grid { grid-template-columns: 1fr; }
+}
+
+.home-feature {
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+[data-md-color-scheme="slate"] .home-feature {
+  background: rgba(18, 19, 26, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+[data-md-color-scheme="slate"] .home-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+[data-md-color-scheme="default"] .home-feature {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+}
+
+[data-md-color-scheme="default"] .home-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border-color: #CBD5E1;
+}
+
+.home-feature__icon {
+  margin-bottom: 1rem;
+  color: #3B82F6;
+}
+
+[data-md-color-scheme="default"] .home-feature__icon {
+  color: #2563EB;
+}
+
+.home-feature__title {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--md-default-fg-color);
+}
+
+.home-feature__desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1rem;
+}
+
+.home-feature__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3B82F6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.home-feature__link:hover {
+  color: #22D3EE;
+}
+
+[data-md-color-scheme="default"] .home-feature__link {
+  color: #2563EB;
+}
+
+[data-md-color-scheme="default"] .home-feature__link:hover {
+  color: #1D4ED8;
+}
+
+/* ============================================================
+   Homepage About Section
+   ============================================================ */
+.home-about {
+  padding: 4rem 0 5rem;
+  text-align: center;
+}
+
+[data-md-color-scheme="slate"] .home-about {
+  background: linear-gradient(180deg, var(--md-default-bg-color) 0%, #0D0F1A 100%);
+}
+
+[data-md-color-scheme="default"] .home-about {
+  background: linear-gradient(180deg, var(--md-default-bg-color) 0%, #E2E8F0 100%);
+}
+
+.home-about__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.home-about__title {
+  font-family: "Orbitron", "Noto Sans SC", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--md-default-fg-color);
+}
+
+.home-about__text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 2rem;
+}
+
+.home-about .md-button {
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  color: #3B82F6;
+  transition: all 0.3s;
+}
+
+.home-about .md-button:hover {
+  border-color: #3B82F6;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+}
+
+[data-md-color-scheme="default"] .home-about .md-button {
+  border-color: #CBD5E1;
+  color: #2563EB;
+}
+
+[data-md-color-scheme="default"] .home-about .md-button:hover {
+  border-color: #2563EB;
+}
+
+/* ============================================================
+   Scroll-triggered Animations
+   ============================================================ */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger cards: each card delays slightly */
+.home-feature:nth-child(2)[data-animate] { transition-delay: 0.1s; }
+.home-feature:nth-child(3)[data-animate] { transition-delay: 0.2s; }
+.home-feature:nth-child(4)[data-animate] { transition-delay: 0.3s; }
+
 @media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   .hero--fullscreen .hero__image {
     animation: none;
   }

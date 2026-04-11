@@ -11,8 +11,8 @@
     {# ====== Parallax hero group (first section, 3D layers) ====== #}
     <section class="mdx-parallax__group" data-md-color-scheme="slate">
 
-      {# Layer 1: space + earth (farthest, depth 4) #}
-      <div class="mdx-parallax__layer" style="--md-parallax-depth: 4;">
+      {# Single image layer — perspective scroll creates parallax with content #}
+      <div class="mdx-parallax__layer" style="--md-parallax-depth: 2;">
         <img
           src="{{ 'assets/hero/space-hero.jpg' | url }}"
           alt=""
@@ -22,18 +22,7 @@
         />
       </div>
 
-      {# Layer 2: moon surface (closer, depth 1) — masked to bottom half #}
-      <div class="mdx-parallax__layer mdx-parallax__layer--moon" style="--md-parallax-depth: 1;">
-        <img
-          src="{{ 'assets/hero/space-hero.jpg' | url }}"
-          alt=""
-          class="mdx-parallax__image"
-          style="--md-image-position: 60%;"
-          draggable="false"
-        />
-      </div>
-
-      {# Blend: gradient fade into next section #}
+      {# Blend: gradient fade from image into next section #}
       <div class="mdx-parallax__layer mdx-parallax__blend"></div>
 
       {# Hero content: title + CTA (sticky, stays visible while scrolling) #}

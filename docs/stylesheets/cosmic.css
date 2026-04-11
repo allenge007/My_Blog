@@ -634,12 +634,6 @@
   z-index: calc(10 - var(--md-parallax-depth, 0));
 }
 
-/* Moon surface layer: mask top half to show only lunar terrain */
-.mdx-parallax__layer--moon {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 42%, black 55%);
-  mask-image: linear-gradient(to bottom, transparent 42%, black 55%);
-}
-
 .mdx-parallax__image {
   display: block;
   height: 100%;

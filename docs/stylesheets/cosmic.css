@@ -696,23 +696,32 @@
 .home-feature {
   padding: 2rem;
   border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.home-feature {
   background: rgba(18, 19, 26, 0.7);
   border: 1px solid rgba(59, 130, 246, 0.1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.3s;
 }
 
 .home-feature:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.25);
+  transform: translateY(-8px);
+  box-shadow:
+    0 12px 40px rgba(59, 130, 246, 0.2),
+    0 0 0 1px rgba(59, 130, 246, 0.15),
+    inset 0 1px 0 rgba(248, 250, 252, 0.05);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+/* Icon floats up on card hover */
+.home-feature:hover .home-feature__icon {
+  transform: translateY(-4px) scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
 }
 
 .home-feature__icon {
   margin-bottom: 1rem;
   color: #3B82F6;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s;
 }
 
 .home-feature__title {
@@ -793,19 +802,21 @@
    ============================================================ */
 [data-animate] {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 [data-animate].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* Stagger cards: each card delays slightly */
-.home-feature:nth-child(2)[data-animate] { transition-delay: 0.1s; }
-.home-feature:nth-child(3)[data-animate] { transition-delay: 0.2s; }
-.home-feature:nth-child(4)[data-animate] { transition-delay: 0.3s; }
+/* Stagger cards */
+.home-feature:nth-child(1)[data-animate] { transition-delay: 0s; }
+.home-feature:nth-child(2)[data-animate] { transition-delay: 0.12s; }
+.home-feature:nth-child(3)[data-animate] { transition-delay: 0.24s; }
+.home-feature:nth-child(4)[data-animate] { transition-delay: 0.36s; }
 
 @media (prefers-reduced-motion: reduce) {
   [data-animate] {

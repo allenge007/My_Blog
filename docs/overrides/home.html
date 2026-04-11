@@ -4,24 +4,32 @@
   {{ super() }}
 
   <style>
+    /* --- Force entire homepage to dark mode --- */
     .md-header {
       position: initial;
+      background: #0B0B10 !important;
+      border-bottom: 1px solid rgba(59,130,246,0.1) !important;
+      box-shadow: none !important;
+      color: #F8FAFC !important;
     }
-    .md-main__inner {
-      margin: 0;
+    .md-header *, .md-header .md-icon { color: #F8FAFC !important; }
+    .md-tabs {
+      background: rgba(11,11,16,0.85) !important;
+      border-bottom: 1px solid rgba(59,130,246,0.06) !important;
     }
-    .md-content {
-      display: none;
-    }
-    @media screen and (min-width: 60em) {
-      .md-sidebar--secondary { display: none; }
-    }
-    @media screen and (min-width: 76.25em) {
-      .md-sidebar--primary { display: none; }
-    }
+    .md-tabs__link { color: rgba(248,250,252,0.7) !important; }
+    .md-tabs__link--active, .md-tabs__link:hover { color: #22D3EE !important; }
+    .md-main { background: #0B0B10 !important; }
+    .md-main__inner { margin: 0; }
+    .md-content { display: none; }
+    .md-footer { background: rgba(6,8,14,0.9) !important; color: #F8FAFC !important; border-top: 1px solid rgba(59,130,246,0.1) !important; }
+    .md-footer a, .md-footer__link { color: rgba(248,250,252,0.7) !important; }
+    @media screen and (min-width: 60em) { .md-sidebar--secondary { display: none; } }
+    @media screen and (min-width: 76.25em) { .md-sidebar--primary { display: none; } }
   </style>
 
-  <section class="mdx-container" data-md-color-scheme="slate" style="background-image: url('{{ 'assets/hero/space-hero.jpg' | url }}');">
+  <!-- Hero with background image -->
+  <section class="mdx-container" id="hero-section" style="background-image: url('{{ 'assets/hero/space-hero.jpg' | url }}');">
     <div class="mdx-hero">
       <div class="mdx-hero__content md-typeset">
         <h1>allenge 的小站</h1>
@@ -33,7 +41,7 @@
   </section>
 
   <!-- Feature cards -->
-  <section class="home-features-wrap" data-md-color-scheme="slate">
+  <section class="home-features-wrap">
     <div class="home-features">
       <div class="home-features__grid md-grid">
         <div class="home-feature" data-animate>
@@ -86,14 +94,34 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      var els = document.querySelectorAll("[data-animate]");
-      if (!els.length) return;
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) { e.target.classList.add("is-visible"); observer.unobserve(e.target); }
+      /* --- Parallax: background image scrolls slower --- */
+      var hero = document.getElementById("hero-section");
+      if (hero && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        var ticking = false;
+        window.addEventListener("scroll", function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              var y = window.pageYOffset;
+              if (y < window.innerHeight * 1.5) {
+                hero.style.backgroundPositionY = "calc(55% + " + (y * 0.35) + "px)";
+              }
+              ticking = false;
+            });
+            ticking = true;
+          }
         });
-      }, { threshold: 0.15 });
-      els.forEach(function(el) { observer.observe(el); });
+      }
+
+      /* --- Scroll-triggered fade-in --- */
+      var els = document.querySelectorAll("[data-animate]");
+      if (els.length) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add("is-visible"); observer.unobserve(e.target); }
+          });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { observer.observe(el); });
+      }
     });
   </script>
 

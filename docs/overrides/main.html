@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block content %}
+{# ---- Full-bleed Hero in the hero block (outside content container) ---- #}
+{% block hero %}
   {% if page.is_homepage %}
-    {# ---- Hero Layout A: Fullscreen ---- #}
     <section class="hero hero--fullscreen" id="hero-fullscreen">
       <div class="hero__background">
         <img src="{{ 'assets/hero/space-hero.jpg' | url }}" alt="Space" class="hero__image" loading="eager" />
@@ -12,44 +12,27 @@
         <h1 class="hero__title">allenge 的小站</h1>
         <p class="hero__tagline">探索宇宙，记录思考</p>
         <a href="#page-content" class="hero__scroll-hint" aria-label="向下滚动">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </a>
       </div>
     </section>
+    <script>document.body.dataset.mdPage = 'homepage';</script>
+  {% endif %}
+{% endblock %}
 
-    {# ---- Hero Layout C: Split ---- #}
-    <section class="hero hero--split" id="hero-split" style="display: none;">
-      <div class="hero__image-side">
-        <img src="{{ 'assets/hero/space-hero.jpg' | url }}" alt="Space" class="hero__image" loading="eager" />
-      </div>
-      <div class="hero__text-side">
-        <h1 class="hero__title">allenge 的小站</h1>
-        <p class="hero__tagline">探索宇宙，记录思考</p>
-        <nav class="hero__nav">
-          <a href="{{ 'blog/' | url }}" class="hero__nav-card">
-            <span class="hero__nav-icon">&#x1F4DD;</span>
-            <span class="hero__nav-label">博客</span>
-          </a>
-          <a href="{{ 'cs/' | url }}" class="hero__nav-card">
-            <span class="hero__nav-icon">&#x1F4BB;</span>
-            <span class="hero__nav-label">计算机</span>
-          </a>
-          <a href="{{ 'math/' | url }}" class="hero__nav-card">
-            <span class="hero__nav-icon">&#x1F4D0;</span>
-            <span class="hero__nav-label">数学</span>
-          </a>
-          <a href="{{ 'about/about_me/' | url }}" class="hero__nav-card">
-            <span class="hero__nav-icon">&#x1F464;</span>
-            <span class="hero__nav-label">关于</span>
-          </a>
-        </nav>
-      </div>
-    </section>
+{# ---- Hide tabs on homepage ---- #}
+{% block tabs %}
+  {% if not page.is_homepage %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
 
+{# ---- Normal content (with anchor for scroll target) ---- #}
+{% block content %}
+  {% if page.is_homepage %}
     <div id="page-content"></div>
   {% endif %}
-
   {{ super() }}
 {% endblock %}

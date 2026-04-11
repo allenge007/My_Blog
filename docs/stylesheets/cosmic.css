@@ -152,6 +152,29 @@
 }
 
 /* ============================================================
+   Homepage: Header overlays hero (fixed + transparent)
+   ============================================================ */
+body[data-md-page="homepage"] .md-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  background: rgba(11, 11, 16, 0.2) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.06) !important;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+body[data-md-page="homepage"][data-md-color-scheme="default"] .md-header,
+body[data-md-page="homepage"] [data-md-color-scheme="default"] .md-header {
+  background: rgba(241, 245, 249, 0.25) !important;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.06) !important;
+}
+
+/* ============================================================
    Header - Frosted Glass
    ============================================================ */
 [data-md-color-scheme="slate"] .md-header {
@@ -593,8 +616,9 @@
    ============================================================ */
 .hero--fullscreen {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  margin-left: calc(-50vw + 50%);
   display: flex;
   align-items: center;
   justify-content: center;

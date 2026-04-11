@@ -589,124 +589,99 @@
 }
 
 /* ============================================================
-   Homepage Hero — fixed background parallax
+   Homepage Hero (follows official MkDocs Material pattern)
    ============================================================ */
-
-/* Background: fixed to viewport, image never scrolls */
-.hero-parallax__bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+.mdx-container {
+  background:
+    url("../assets/hero/space-hero.jpg") no-repeat center 55% / cover;
+  overflow: hidden;
 }
 
-.hero-parallax__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 55%;
-}
-
-/* Content area: sized to viewport, content at bottom */
-.hero-parallax__content {
-  position: relative;
-  height: 100vh;
+.mdx-hero {
+  color: #F8FAFC;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 2rem 5rem;
-  /* Subtle dark overlay via gradient so text is readable */
-  background: linear-gradient(
-    to bottom,
-    rgba(11, 11, 16, 0.1) 0%,
-    rgba(11, 11, 16, 0.25) 50%,
-    rgba(11, 11, 16, 0.5) 100%
-  );
+  min-height: calc(100vh - 6rem);
 }
 
-.hero-parallax__text {
-  max-width: 32rem;
+.mdx-hero__image {
+  order: 1;
+  width: 100%;
+  height: auto;
+  transform: translateX(4rem);
 }
 
-.hero-parallax__text h1 {
+.mdx-hero__image img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mdx-hero__content {
+  margin-top: 3.5rem;
+  padding-bottom: 6rem;
+  max-width: 28rem;
+}
+
+.mdx-hero__content h1 {
   font-family: "Orbitron", "Noto Sans SC", sans-serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 700;
   color: #F8FAFC;
-  text-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.35);
   margin-bottom: 0.5rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
-.hero-parallax__text p {
+.mdx-hero__content p {
   color: rgba(226, 232, 240, 0.85);
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   margin-bottom: 1.5rem;
 }
 
-.hero-parallax__actions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.hero-parallax__actions .md-button {
+.mdx-hero__content .md-button {
   border-radius: 6px;
   padding: 0.5rem 1.5rem;
   font-weight: 600;
+  margin-right: 0.5rem;
   transition: all 0.3s;
 }
 
-.hero-parallax__actions .md-button--primary {
+.mdx-hero__content .md-button--primary {
   background: #3B82F6;
   border-color: #3B82F6;
   color: #F8FAFC;
 }
 
-.hero-parallax__actions .md-button--primary:hover {
+.mdx-hero__content .md-button--primary:hover {
   background: #2563EB;
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
-.hero-parallax__actions .md-button:not(.md-button--primary) {
+.mdx-hero__content .md-button:not(.md-button--primary) {
   color: #F8FAFC;
   border-color: rgba(248, 250, 252, 0.4);
 }
 
-.hero-parallax__actions .md-button:not(.md-button--primary):hover {
+.mdx-hero__content .md-button:not(.md-button--primary):hover {
   border-color: #22D3EE;
   color: #22D3EE;
 }
 
-.hero-parallax__arrow {
-  text-align: center;
-  margin-top: 2rem;
-  animation: hero-bounce 2s ease-in-out infinite;
-}
-
-@keyframes hero-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-/* Features section: opaque background covers the fixed image as it scrolls up */
-.home-features-section {
-  position: relative;
-  z-index: 1;
-}
-
-[data-md-color-scheme="slate"] .home-features-section {
-  background: #0B0B10;
-}
-
-[data-md-color-scheme="default"] .home-features-section {
-  background: #F1F5F9;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-parallax__bg { position: absolute; }
-  .hero-parallax__arrow { animation: none; }
+/* On smaller screens, stack vertically */
+@media (max-width: 76.25em) {
+  .mdx-hero {
+    flex-direction: column;
+  }
+  .mdx-hero__image {
+    order: 0;
+    transform: none;
+  }
+  .mdx-hero__content {
+    margin-top: 0;
+    padding: 2rem 1rem 4rem;
+  }
 }
 
 /* ============================================================
@@ -897,5 +872,10 @@
     transform: none;
     transition: none;
   }
+}
+
+/* Remove home-features-section wrapper if still referenced */
+.home-features-section {
+  position: relative;
 }
 

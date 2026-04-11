@@ -482,12 +482,13 @@
   </section>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    /* IIFE — runs immediately, works with navigation.instant */
+    (function() {
       /* --- Parallax: background image scrolls slower --- */
       var hero = document.getElementById("hero-section");
       if (hero && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         var ticking = false;
-        window.addEventListener("scroll", function() {
+        var onScroll = function() {
           if (!ticking) {
             requestAnimationFrame(function() {
               var y = window.pageYOffset;
@@ -498,11 +499,12 @@
             });
             ticking = true;
           }
-        });
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
       }
 
       /* --- Scroll-triggered fade-in --- */
-      var els = document.querySelectorAll("[data-animate]");
+      var els = document.querySelectorAll("[data-animate]:not(.is-visible)");
       if (els.length) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(e) {
@@ -511,7 +513,7 @@
         }, { threshold: 0.1 });
         els.forEach(function(el) { observer.observe(el); });
       }
-    });
+    })();
   </script>
 
 

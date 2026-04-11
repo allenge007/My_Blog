@@ -668,6 +668,16 @@
    Homepage Feature Cards
    ============================================================ */
 
+/* Thin gradient transition from hero image into dark content */
+.home-hero-fade {
+  height: 6rem;
+  background: linear-gradient(to bottom, transparent, #0B0B10);
+  margin-top: -6rem;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Wrapper forces dark scheme for entire homepage below hero */
 .home-features-wrap {
   background: #0B0B10;

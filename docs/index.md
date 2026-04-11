@@ -1,6 +1,7 @@
 ---
 hide:
   - navigation
+  - toc
 title: 欢迎光临我的小站
 ---
 

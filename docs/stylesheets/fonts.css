@@ -15,6 +15,12 @@
   letter-spacing: 0.02em;
 }
 
+/* CJK text should not have extra letter-spacing — it disrupts character rhythm */
+:lang(zh) .md-typeset h1,
+:lang(zh) .md-typeset h2 {
+  letter-spacing: 0;
+}
+
 .md-typeset h3,
 .md-typeset h4,
 .md-typeset h5,

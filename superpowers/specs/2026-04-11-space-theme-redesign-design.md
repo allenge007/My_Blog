@@ -130,9 +130,14 @@
 
 ### 4.3 实现方式
 
-通过 MkDocs Material 的 `custom_dir: docs/overrides` 机制，覆盖首页模板。首页 `index.md` 的 `hide: navigation` 已设置。新增 `overrides/main.html` 或在 `index.md` 中使用 HTML 块实现 Hero 区域。
+通过 MkDocs Material 的 `custom_dir: docs/overrides` 机制实现：
 
-图片路径：用户提供图片后放入 `docs/assets/hero/` 目录。
+1. 新增 `overrides/main.html`，继承 `base.html`，判断当前页面是否为首页（`page.is_homepage`）
+2. 若为首页，在 `content` block 之前插入 Hero 区域的 HTML
+3. Hero 区域的样式写在 `cosmic.css` 中（与主题统一管理）
+4. 两种布局通过 CSS class 切换（`.hero--fullscreen` / `.hero--split`），用户在 `index.md` 的 meta 中选择
+
+图片路径：用户提供图片后放入 `docs/assets/hero/` 目录。在 Hero HTML 中通过相对路径引用。
 
 ---
 

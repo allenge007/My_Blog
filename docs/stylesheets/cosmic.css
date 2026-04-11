@@ -591,42 +591,36 @@
 /* ============================================================
    Homepage Hero (follows official MkDocs Material pattern)
    ============================================================ */
+/* Hero container: full-viewport background image */
 .mdx-container {
-  background:
-    url("../assets/hero/space-hero.jpg") no-repeat center 55% / cover;
+  background-size: cover;
+  background-position: center 55%;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
 .mdx-hero {
-  color: #F8FAFC;
   display: flex;
+  align-items: flex-end;
   min-height: calc(100vh - 6rem);
-}
-
-.mdx-hero__image {
-  order: 1;
-  width: 100%;
-  height: auto;
-  transform: translateX(4rem);
-}
-
-.mdx-hero__image img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
+  padding: 0 1.5rem 4rem;
+  /* Subtle gradient so text is readable over the image */
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 11, 16, 0.05) 0%,
+    rgba(11, 11, 16, 0.2) 50%,
+    rgba(11, 11, 16, 0.55) 100%
+  );
 }
 
 .mdx-hero__content {
-  margin-top: 3.5rem;
-  padding-bottom: 6rem;
-  max-width: 28rem;
+  max-width: 32rem;
+  color: #F8FAFC;
 }
 
 .mdx-hero__content h1 {
   font-family: "Orbitron", "Noto Sans SC", sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   color: #F8FAFC;
   text-shadow: 0 0 30px rgba(59, 130, 246, 0.35);
@@ -667,21 +661,6 @@
 .mdx-hero__content .md-button:not(.md-button--primary):hover {
   border-color: #22D3EE;
   color: #22D3EE;
-}
-
-/* On smaller screens, stack vertically */
-@media (max-width: 76.25em) {
-  .mdx-hero {
-    flex-direction: column;
-  }
-  .mdx-hero__image {
-    order: 0;
-    transform: none;
-  }
-  .mdx-hero__content {
-    margin-top: 0;
-    padding: 2rem 1rem 4rem;
-  }
 }
 
 /* ============================================================

@@ -601,10 +601,11 @@
 
 .mdx-hero {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   min-height: calc(100vh - 6rem);
-  padding: 0 1.5rem 4rem;
-  /* Subtle gradient so text is readable over the image */
+  padding: 2rem 1.5rem 4rem;
+  text-align: center;
   background: linear-gradient(
     to bottom,
     rgba(11, 11, 16, 0.05) 0%,
@@ -614,7 +615,7 @@
 }
 
 .mdx-hero__content {
-  max-width: 32rem;
+  max-width: 36rem;
   color: #F8FAFC;
 }
 
@@ -666,19 +667,16 @@
 /* ============================================================
    Homepage Feature Cards
    ============================================================ */
+
+/* Wrapper forces dark scheme for entire homepage below hero */
+.home-features-wrap {
+  background: #0B0B10;
+  color: rgba(248, 250, 252, 0.87);
+}
+
 .home-features {
   position: relative;
   padding: 4rem 0 5rem;
-  background: var(--md-default-bg-color);
-  /* Top gradient: seamless blend from hero */
-}
-
-[data-md-color-scheme="slate"] .home-features {
-  background: #0B0B10;
-}
-
-[data-md-color-scheme="default"] .home-features {
-  background: linear-gradient(180deg, #F1F5F9 0%, #F1F5F9 100%);
 }
 
 .home-features__grid {
@@ -701,26 +699,15 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-[data-md-color-scheme="slate"] .home-feature {
+.home-feature {
   background: rgba(18, 19, 26, 0.7);
   border: 1px solid rgba(59, 130, 246, 0.1);
 }
 
-[data-md-color-scheme="slate"] .home-feature:hover {
+.home-feature:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
   border-color: rgba(59, 130, 246, 0.25);
-}
-
-[data-md-color-scheme="default"] .home-feature {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-}
-
-[data-md-color-scheme="default"] .home-feature:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
-  border-color: #CBD5E1;
 }
 
 .home-feature__icon {
@@ -728,22 +715,18 @@
   color: #3B82F6;
 }
 
-[data-md-color-scheme="default"] .home-feature__icon {
-  color: #2563EB;
-}
-
 .home-feature__title {
   font-family: "Noto Sans SC", sans-serif;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--md-default-fg-color);
+  color: #F8FAFC;
 }
 
 .home-feature__desc {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--md-default-fg-color--light);
+  color: rgba(148, 163, 184, 0.8);
   margin-bottom: 1rem;
 }
 
@@ -759,14 +742,6 @@
   color: #22D3EE;
 }
 
-[data-md-color-scheme="default"] .home-feature__link {
-  color: #2563EB;
-}
-
-[data-md-color-scheme="default"] .home-feature__link:hover {
-  color: #1D4ED8;
-}
-
 /* ============================================================
    Homepage About Section
    ============================================================ */
@@ -775,12 +750,8 @@
   text-align: center;
 }
 
-[data-md-color-scheme="slate"] .home-about {
+.home-about {
   background: linear-gradient(180deg, #0B0B10 0%, rgba(6, 8, 14, 1) 100%);
-}
-
-[data-md-color-scheme="default"] .home-about {
-  background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
 }
 
 .home-about__inner {
@@ -793,13 +764,13 @@
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--md-default-fg-color);
+  color: #F8FAFC;
 }
 
 .home-about__text {
   font-size: 1rem;
   line-height: 1.8;
-  color: var(--md-default-fg-color--light);
+  color: rgba(148, 163, 184, 0.8);
   margin-bottom: 2rem;
 }
 
@@ -815,15 +786,6 @@
 .home-about .md-button:hover {
   border-color: #3B82F6;
   box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
-}
-
-[data-md-color-scheme="default"] .home-about .md-button {
-  border-color: #CBD5E1;
-  color: #2563EB;
-}
-
-[data-md-color-scheme="default"] .home-about .md-button:hover {
-  border-color: #2563EB;
 }
 
 /* ============================================================
@@ -853,8 +815,4 @@
   }
 }
 
-/* Remove home-features-section wrapper if still referenced */
-.home-features-section {
-  position: relative;
-}
 

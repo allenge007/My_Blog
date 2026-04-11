@@ -835,7 +835,12 @@
 
 [data-animate].is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: none;
+}
+
+/* Hover must win over is-visible — higher specificity */
+.home-feature.is-visible:hover {
+  transform: translateY(-8px);
 }
 
 /* Stagger cards */

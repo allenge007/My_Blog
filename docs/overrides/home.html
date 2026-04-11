@@ -4,26 +4,40 @@
   {{ super() }}
 
   <style>
-    /* --- Force entire homepage to dark mode --- */
-    .md-header {
-      position: initial;
-      background: #0B0B10 !important;
-      border-bottom: 1px solid rgba(59,130,246,0.1) !important;
-      box-shadow: none !important;
-      color: #F8FAFC !important;
+    /* --- Force light-mode CSS variables to dark values on homepage ---
+       This is the nuclear option: when Material switches to "default" scheme,
+       we override every variable back to dark values. */
+    [data-md-color-scheme="default"] {
+      --md-default-bg-color: #0B0B10 !important;
+      --md-default-bg-color--light: #12131A !important;
+      --md-default-bg-color--lighter: #1A1B26 !important;
+      --md-default-bg-color--lightest: #222436 !important;
+      --md-default-fg-color: rgba(248, 250, 252, 0.87) !important;
+      --md-default-fg-color--light: rgba(148, 163, 184, 0.54) !important;
+      --md-default-fg-color--lighter: rgba(148, 163, 184, 0.32) !important;
+      --md-default-fg-color--lightest: rgba(148, 163, 184, 0.12) !important;
+      --md-primary-fg-color: #3B82F6 !important;
+      --md-primary-fg-color--light: #60A5FA !important;
+      --md-primary-fg-color--dark: #2563EB !important;
+      --md-primary-bg-color: #E0EAFF !important;
+      --md-accent-fg-color: #22D3EE !important;
+      --md-accent-fg-color--transparent: rgba(34, 211, 238, 0.1) !important;
+      --md-code-bg-color: #0D0E18 !important;
+      --md-code-fg-color: #E2E8F0 !important;
+      --md-typeset-a-color: #22D3EE !important;
+      --md-footer-bg-color: rgba(6, 8, 14, 0.85) !important;
+      --md-footer-bg-color--dark: rgba(4, 5, 10, 0.9) !important;
     }
-    .md-header *, .md-header .md-icon { color: #F8FAFC !important; }
-    .md-tabs {
-      background: rgba(11,11,16,0.85) !important;
-      border-bottom: 1px solid rgba(59,130,246,0.06) !important;
-    }
-    .md-tabs__link { color: rgba(248,250,252,0.7) !important; }
-    .md-tabs__link--active, .md-tabs__link:hover { color: #22D3EE !important; }
-    .md-main { background: #0B0B10 !important; }
+
+    .md-header { position: initial; }
     .md-main__inner { margin: 0; }
     .md-content { display: none; }
-    .md-footer { background: rgba(6,8,14,0.9) !important; color: #F8FAFC !important; border-top: 1px solid rgba(59,130,246,0.1) !important; }
-    .md-footer a, .md-footer__link { color: rgba(248,250,252,0.7) !important; }
+
+    /* Scrollbar always dark */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(11,11,16,0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 3px; }
+
     @media screen and (min-width: 60em) { .md-sidebar--secondary { display: none; } }
     @media screen and (min-width: 76.25em) { .md-sidebar--primary { display: none; } }
   </style>
@@ -128,4 +142,4 @@
 {% endblock %}
 
 {% block content %}{% endblock %}
-{% block footer %}{{ super() }}{% endblock %}
+{% block footer %}{% endblock %}

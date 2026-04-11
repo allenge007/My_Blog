@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+  {{ super() }}
+
+  <!-- Homepage-only overrides -->
+  <style>
+    /* Header is static on homepage, not sticky */
+    .md-header {
+      position: initial;
+    }
+
+    /* Remove inner margin */
+    .md-main__inner {
+      margin: 0;
+    }
+
+    /* Hide main content area on homepage */
+    .md-content {
+      display: none;
+    }
+
+    /* Hide sidebars */
+    @media screen and (min-width: 60em) {
+      .md-sidebar--secondary {
+        display: none;
+      }
+    }
+    @media screen and (min-width: 76.25em) {
+      .md-sidebar--primary {
+        display: none;
+      }
+    }
+  </style>
+
+  <!-- Hero -->
+  <section class="hero hero--fullscreen">
+    <div class="hero__background">
+      <img
+        src="{{ 'assets/hero/space-hero.jpg' | url }}"
+        alt="Space"
+        class="hero__image"
+        loading="eager"
+        draggable="false"
+      />
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title">allenge 的小站</h1>
+      <p class="hero__tagline">探索宇宙，记录思考</p>
+      <div class="hero__actions">
+        <a href="{{ 'blog/' | url }}" class="md-button md-button--primary">
+          博客
+        </a>
+        <a href="{{ 'cs/' | url }}" class="md-button">
+          笔记
+        </a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block footer %}{% endblock %}

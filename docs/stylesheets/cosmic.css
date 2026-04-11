@@ -605,43 +605,88 @@
 
 .hero--fullscreen .hero__background {
   position: absolute;
-  inset: -20%; /* extra space for parallax movement */
+  inset: 0;
   z-index: 0;
+}
+
+/* Two parallax layers using the same image */
+.hero__layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   will-change: transform;
 }
 
-/* Bottom fade: thin seam blend — lets the moon surface do the transition */
+/* Far layer: shows space + earth (top ~58% of image) */
+.hero__layer--far {
+  z-index: 0;
+  /* Extra bottom space so earth doesn't get cut during parallax shift */
+  bottom: -30%;
+}
+
+.hero__layer--far .hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+/* Near layer: shows moon surface (bottom ~50% of image) */
+.hero__layer--near {
+  z-index: 1;
+  top: 50%;
+  /* Extra bottom space for parallax */
+  bottom: -20%;
+}
+
+.hero__layer--near .hero__image {
+  width: 100%;
+  height: 200%; /* double height so bottom half aligns */
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/* Bottom fade: moon-surface-colored seam into content
+   Sampled from image — warm gray #8B8178 mid-tone of lunar regolith */
 .hero__fade {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 8vh;
-  z-index: 1;
+  height: 12vh;
+  z-index: 2;
   pointer-events: none;
 }
 
 [data-md-color-scheme="slate"] .hero__fade {
-  background: linear-gradient(to bottom, transparent 0%, #0B0B10 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(11, 11, 16, 0.3) 40%,
+    #0B0B10 100%
+  );
 }
 
 [data-md-color-scheme="default"] .hero__fade {
-  background: linear-gradient(to bottom, transparent 0%, #F1F5F9 100%);
+  /* Blend from lunar gray into light background */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(139, 129, 120, 0.2) 30%,
+    rgba(241, 245, 249, 0.6) 60%,
+    #F1F5F9 100%
+  );
 }
 
-/* Ken Burns slow zoom effect on hero image */
-.hero--fullscreen .hero__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 60%; /* keep Earth visible, show moon surface at bottom */
+/* Ken Burns slow zoom — only on far layer (space + earth) */
+.hero__layer--far .hero__image {
   animation: kenburns 25s ease-in-out infinite alternate;
   transform-origin: center 40%;
 }
 
 @keyframes kenburns {
-  0%   { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.08) translate(-1%, -1%); }
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.06) translate(-0.5%, -0.5%); }
 }
 
 /* Overlay: darkens space area, thins out over moon surface */
@@ -848,7 +893,7 @@
 }
 
 [data-md-color-scheme="default"] .home-features {
-  background: #F1F5F9;
+  background: linear-gradient(180deg, #F1F5F9 0%, #F1F5F9 100%);
 }
 
 .home-features__grid {
@@ -1021,7 +1066,7 @@
     transform: none;
     transition: none;
   }
-  .hero--fullscreen .hero__image {
+  .hero__layer--far .hero__image {
     animation: none;
   }
   .hero--fullscreen .hero__overlay::before {

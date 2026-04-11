@@ -44,19 +44,33 @@
     }
   </style>
 
-  <!-- Hero — background layer (parallax: scrolls slower) -->
+  <!-- Hero — split into far (space+earth) and near (moon surface) layers -->
   <section class="hero hero--fullscreen" id="hero">
-    <div class="hero__background" id="hero-bg">
-      <img
-        src="{{ 'assets/hero/space-hero.jpg' | url }}"
-        alt="Space"
-        class="hero__image"
-        loading="eager"
-        draggable="false"
-      />
+    <div class="hero__background">
+      <!-- Far layer: space + earth (slowest scroll) -->
+      <div class="hero__layer hero__layer--far" id="hero-far">
+        <img
+          src="{{ 'assets/hero/space-hero.jpg' | url }}"
+          alt="Space"
+          class="hero__image"
+          loading="eager"
+          draggable="false"
+        />
+      </div>
+      <!-- Near layer: moon surface (medium scroll speed) -->
+      <div class="hero__layer hero__layer--near" id="hero-near">
+        <img
+          src="{{ 'assets/hero/space-hero.jpg' | url }}"
+          alt=""
+          class="hero__image"
+          loading="eager"
+          draggable="false"
+          aria-hidden="true"
+        />
+      </div>
       <div class="hero__overlay"></div>
     </div>
-    <!-- Foreground content (scrolls at normal speed) -->
+    <!-- Foreground content (fastest, near-normal speed) -->
     <div class="hero__content">
       <h1 class="hero__title">allenge 的小站</h1>
       <p class="hero__tagline">探索宇宙，记录思考</p>
@@ -69,7 +83,7 @@
         </a>
       </div>
     </div>
-    <!-- Bottom gradient: smooth blend into features section -->
+    <!-- Bottom fade: moon-surface-colored seam -->
     <div class="hero__fade"></div>
   </section>
 
@@ -146,27 +160,33 @@
     </div>
   </section>
 
-  <!-- Parallax scroll + fade-in observer -->
+  <!-- 3-layer parallax + scroll fade-in -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      /* --- Parallax: hero background scrolls at 0.4x speed --- */
-      var heroBg = document.getElementById("hero-bg");
       var hero = document.getElementById("hero");
+      var heroFar = document.getElementById("hero-far");
+      var heroNear = document.getElementById("hero-near");
       var heroContent = document.querySelector(".hero__content");
-      if (heroBg && hero) {
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (hero && heroFar && heroNear && !reduced) {
         var ticking = false;
         window.addEventListener("scroll", function() {
           if (!ticking) {
             requestAnimationFrame(function() {
               var scrollY = window.pageYOffset;
               var heroH = hero.offsetHeight;
-              if (scrollY < heroH) {
-                /* Background moves at 40% speed — creates depth */
-                heroBg.style.transform = "translateY(" + (scrollY * 0.4) + "px)";
-                /* Content fades out as you scroll past */
-                var opacity = 1 - (scrollY / (heroH * 0.6));
+              if (scrollY < heroH * 1.2) {
+                /* 3 depth layers:
+                   Far  (space+earth): 0.5x → very slow, feels distant
+                   Near (moon surface): 0.25x → medium, feels closer
+                   Content (text):     fades + drifts up */
+                heroFar.style.transform = "translate3d(0," + (scrollY * 0.5) + "px,0)";
+                heroNear.style.transform = "translate3d(0," + (scrollY * 0.2) + "px,0)";
+
+                var opacity = 1 - (scrollY / (heroH * 0.55));
                 heroContent.style.opacity = Math.max(0, opacity);
-                heroContent.style.transform = "translateY(" + (scrollY * 0.15) + "px)";
+                heroContent.style.transform = "translate3d(0," + (scrollY * 0.1) + "px,0)";
               }
               ticking = false;
             });
@@ -175,7 +195,7 @@
         });
       }
 
-      /* --- Scroll-triggered fade-in for sections --- */
+      /* Scroll-triggered fade-in for sections */
       var els = document.querySelectorAll("[data-animate]");
       if (els.length) {
         var observer = new IntersectionObserver(function(entries) {

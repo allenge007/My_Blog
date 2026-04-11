@@ -610,35 +610,23 @@
   will-change: transform;
 }
 
-/* Bottom fade: smooth blend from hero into features section */
+/* Bottom fade: thin seam blend — lets the moon surface do the transition */
 .hero__fade {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 30vh;
+  height: 8vh;
   z-index: 1;
   pointer-events: none;
 }
 
 [data-md-color-scheme="slate"] .hero__fade {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(11, 11, 16, 0.4) 30%,
-    rgba(11, 11, 16, 0.8) 65%,
-    #0B0B10 100%
-  );
+  background: linear-gradient(to bottom, transparent 0%, #0B0B10 100%);
 }
 
 [data-md-color-scheme="default"] .hero__fade {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(241, 245, 249, 0.3) 30%,
-    rgba(241, 245, 249, 0.7) 65%,
-    #F1F5F9 100%
-  );
+  background: linear-gradient(to bottom, transparent 0%, #F1F5F9 100%);
 }
 
 /* Ken Burns slow zoom effect on hero image */
@@ -646,8 +634,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 60%; /* keep Earth visible, show moon surface at bottom */
   animation: kenburns 25s ease-in-out infinite alternate;
-  transform-origin: center center;
+  transform-origin: center 40%;
 }
 
 @keyframes kenburns {
@@ -655,15 +644,16 @@
   100% { transform: scale(1.08) translate(-1%, -1%); }
 }
 
-/* Animated gradient overlay with subtle color shift */
+/* Overlay: darkens space area, thins out over moon surface */
 .hero--fullscreen .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(11, 11, 16, 0.15) 0%,
-    rgba(11, 11, 16, 0.4) 50%,
-    rgba(11, 11, 16, 0.85) 100%
+    rgba(11, 11, 16, 0.2) 0%,
+    rgba(11, 11, 16, 0.35) 40%,
+    rgba(11, 11, 16, 0.15) 70%,
+    rgba(11, 11, 16, 0.05) 100%
   );
 }
 
@@ -719,13 +709,14 @@
   100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
 }
 
-/* Light mode: hero overlay stays dark (image always looks good) */
+/* Light mode: same treatment — let the image breathe */
 [data-md-color-scheme="default"] .hero--fullscreen .hero__overlay {
   background: linear-gradient(
     to bottom,
-    rgba(11, 11, 16, 0.1) 0%,
-    rgba(11, 11, 16, 0.35) 50%,
-    rgba(11, 11, 16, 0.75) 100%
+    rgba(11, 11, 16, 0.15) 0%,
+    rgba(11, 11, 16, 0.3) 40%,
+    rgba(11, 11, 16, 0.1) 70%,
+    rgba(11, 11, 16, 0.02) 100%
   );
 }
 

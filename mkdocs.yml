@@ -4,22 +4,22 @@ theme:
   name: material
   custom_dir: docs/overrides
   palette:
-    #Dark Mode
+    # Dark Mode - Space
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       toggle:
         icon: material/weather-sunny
         name: 切换到浅色模式
-      primary: teal
-      accent: pink
-    #Light Mode
+      primary: custom
+      accent: custom
+    # Light Mode - Space
     - media: "(prefers-color-scheme: light)"
       scheme: default
       toggle:
         icon: material/weather-night
         name: 切换到深色模式
-      primary: teal
-      accent: deep purple
+      primary: custom
+      accent: custom
   features:
     - announce.dismiss #呈现可标记为由用户读取的临时公告，可以包含一个用于取消当前公告的按钮
     - navigation.instant #在页面加载时，导航栏将立即显示在页面上，而不是在用户滚动到顶部时显示
@@ -89,6 +89,8 @@ extra_javascript:
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
 
 extra_css:
+  - stylesheets/fonts.css
+  - stylesheets/cosmic.css
   - https://unpkg.com/katex@0/dist/katex.min.css
 
 plugins:
